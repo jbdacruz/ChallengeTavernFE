@@ -1,0 +1,29 @@
+name: deploy-spa
+on: [push]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+        working-directory: frontend
+      - run: npm run build -- --configuration=production
+        working-directory: frontend
+
+      - name: Upload index.html (no-cache)
+        run: |
+          aws s3 cp frontend/dist/*/index.html s3://challengetavern-spa-prod/index.html \
+            --cache-control "no-store, no-cache, must-revalidate" \
+            --content-type "text/html"
+      - name: Upload assets (long cache)
+        run: |
+          aws s3 sync frontend/dist/*/ s3://challengetavern-spa-prod/ \
+            --exclude "index.html" \
+            --cache-control "public, max-age=31536000, immutable"
+      - name: Invalidate CloudFront (index.html)
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CF_DIST_ID }} \
+            --paths "/index.html"
