@@ -1,0 +1,209 @@
+<form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)" novalidate>
+  <div class="container py-4">
+    <div class="row g-4 align-items-stretch">
+
+      <!-- Left: Form Card -->
+      <div class="col-12 col-lg-7">
+        <div class="auth-card shadow-sm rounded-4 p-4 p-lg-5">
+
+          <div class="d-flex align-items-center gap-2 mb-4">
+            <img src="/assets/challenge_tavern_logo_camo.jpg" alt="Challenge Tavern" width="56" height="44" class="rounded">
+            <h1 class="h4 mb-0">Create your account</h1>
+          </div>
+
+          <!-- Name -->
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="firstName">First name</label>
+              <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                class="form-control"
+                placeholder="Jody"
+                ngModel
+                required
+                #firstNameCtrl="ngModel">
+              @if (firstNameCtrl.touched && firstNameCtrl.invalid){
+              <div class="invalid-msg" >First name is required.</div>
+                }
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label" for="lastName">Last name</label>
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                class="form-control"
+                placeholder="Shmuckatelli"
+                ngModel
+                required
+                #lastNameCtrl="ngModel">
+              @if (lastNameCtrl.touched && lastNameCtrl.invalid){
+              <div class="invalid-msg" >Last name is required.</div>
+                }
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="mt-3">
+            <label class="form-label" for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              class="form-control"
+              placeholder="name@example.com"
+              ngModel
+              required
+              email
+              #emailCtrl="ngModel">
+            @if (emailCtrl.touched && emailCtrl.errors?.['required']) {
+              <div class="invalid-msg" >Email is required.</div>
+
+            }
+            @if (emailCtrl.touched && emailCtrl.errors?.['email']) {
+              <div class="invalid-msg" >Enter a valid email.</div>
+            }
+          </div>
+
+          <!-- Password -->
+          <div class="mt-3">
+            <label class="form-label" for="password">Password</label>
+            <div class="input-group">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                class="form-control"
+                placeholder="Minimum 12 characters"
+                minlength="12"
+                ngModel
+                required
+                #passwordCtrl="ngModel">
+              <button type="button" class="btn btn-outline-secondary" (click)="pw.type = pw.type === 'password' ? 'text' : 'password'" #pwBtn>Show</button>
+            </div>
+            <!-- (Small trick so the button toggles) -->
+            <input hidden #pw type="password">
+            @if (passwordCtrl.touched && passwordCtrl.errors?.['required']){
+              <div class="invalid-msg" >Password is required.</div>
+            }
+            @if (passwordCtrl.touched && passwordCtrl.errors?.['minlength']){
+              <div class="invalid-msg" >At least 12 characters.</div>
+              }
+          </div>
+
+          <!-- Height & Weight -->
+          <div class="row g-3 mt-3">
+            <div class="col-6 col-md-4">
+              <label class="form-label" for="heightFt">Height</label>
+              <div class="input-group">
+                <input
+                  id="heightFt"
+                  name="heightFt"
+                  type="number"
+                  inputmode="numeric"
+                  class="form-control"
+                  placeholder="ft"
+                  min="0"
+                  ngModel>
+                <span class="input-group-text">ft</span>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-4">
+              <label class="form-label invisible d-block d-md-inline" for="heightIn">Height</label>
+              <div class="input-group">
+                <input
+                  id="heightIn"
+                  name="heightIn"
+                  type="number"
+                  inputmode="numeric"
+                  class="form-control"
+                  placeholder="in"
+                  min="0" max="11"
+                  ngModel>
+                <span class="input-group-text">in</span>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label" for="weight">Weight</label>
+              <div class="input-group">
+                <input
+                  id="weight"
+                  name="weight"
+                  type="number"
+                  inputmode="numeric"
+                  class="form-control"
+                  placeholder="weight"
+                  min="0"
+                  ngModel>
+                <span class="input-group-text">lb</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Branch -->
+          <div class="mt-3">
+            <label class="form-label" for="branch">Branch</label>
+            <select id="branch" name="branch" class="form-select" ngModel>
+              <option [ngValue]="null" disabled selected>Select branch…</option>
+              <option>Army</option>
+              <option>USMC</option>
+              <option>Navy</option>
+              <option>Air Force</option>
+              <option>Space Force</option>
+              <option>Coast Guard</option>
+              <option>Civ Div</option>
+            </select>
+          </div>
+
+          <!-- Birthday -->
+          <div class="mt-3">
+            <label class="form-label" for="birthday">Birthday</label>
+            <input
+              id="birthday"
+              name="birthday"
+              type="date"
+              class="form-control"
+              ngModel>
+          </div>
+
+          <!-- Submit -->
+          <div class="d-grid mt-4">
+            <button class="btn btn-primary btn-lg" type="submit" [disabled]="signUpForm.invalid">
+              Create account
+            </button>
+          </div>
+
+          <!-- Small footnote -->
+          <p class="text-muted small mt-3 mb-0">
+            By creating an account you agree to our Terms & Privacy.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: Visual Panel -->
+      <div class="col-12 col-lg-5">
+        <div class="visual-card rounded-4 overflow-hidden h-100">
+          <img class="w-100 h-100 object-fit-cover" src="assets/las_pulgas_background.jpg" alt="Las Pulgas">
+          <div class="visual-overlay p-4 p-lg-5">
+            <h2 class="h4 text-white mb-2">Welcome to Challenge Tavern</h2>
+            <p class="text-white-50 mb-0">Compete. Log workouts. Climb the leaderboard.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
+<dialog #welcomeDialog class="rounded-xl p-6">
+  <h2 class="text-xl font-semibold mb-2">Welcome, {{ newUserName }}! 🎉</h2>
+  <p>Account created successfully.</p>
+  <p class="text-sm opacity-70">Redirecting to login…</p>
+</dialog>
+<dialog #errorDialog class="rounded-xl p-6">
+  <h2 class="text-xl font-semibold mb-2">Error creating user! 🎉</h2>
+</dialog>

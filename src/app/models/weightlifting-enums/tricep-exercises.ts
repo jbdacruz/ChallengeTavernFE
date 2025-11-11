@@ -1,0 +1,15 @@
+export enum TricepExercises {
+  BARBELL_STANDING_TRICEPS_EXTENSION = "Barbell Standing Triceps Extension",
+  BARBELL_INCLINE_TRICEPS_EXTENSION = "Barbell Incline Triceps Extension",
+  BARBELL_LYING_TRICEPS_EXTENSION = "Barbell Lying Triceps Extension",
+  BENCH_DIP = "Bench Dip",
+  CROSSBODY_CABLE_TRICEPS_EXTENSION = "Crossbody Cable Triceps Extension",
+  CLOSE_GRIP_PUSH_UP = "Close Grip Push up",
+  DUMBBELL_LYING_TRICEPS_EXTENSION = "Dumbbell Lying Triceps Extension",
+  DUMBBELL_STANDING_TRICEPS_EXTENSION = "Dumbbell Standing Triceps Extension",
+  OVERHEAD_CABLE_TRICEPS_EXTENSION = "Overhead Cable Triceps Extension",
+  TATE_PRESS = "Tate Press",
+  TRICEP_BODYWEIGHT_EXTENSION = "Tricep Bodyweight Extension",
+  TRICEP_PUSHDOWN_WITH_BAR = "Tricep Pushdown With Bar",
+  TRICEP_PUSHDOWN_WITH_ROPE = "Tricep Pushdown With Rope",
+}

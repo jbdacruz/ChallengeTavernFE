@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark ct-navbar sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/home">
+      <img src="/assets/challenge_tavern_logo_camo.jpg" alt="Challenge Tavern" width="48" height="48"
+           class="rounded-2 shadow-sm">
+      <span class="fw-bold d-none d-sm-inline">Challenge&nbsp;Tavern</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-nav me-auto">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+
+        @if (loginService.isUserLoggedIn()) {
+          <a class="nav-link" routerLink="/challenges" routerLinkActive="active">Challenges</a>
+          <a class="nav-link" routerLink="/activities" routerLinkActive="active">Activities</a>
+          <a class="nav-link" [routerLink]="['/users', userId]" routerLinkActive="active">Profile</a>
+        } @else {
+          <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+        }
+      </div>
+
+      @if (loginService.isUserLoggedIn()) {
+        <div class="d-flex align-items-center gap-3">
+          <span class="text-white-50 small d-none d-md-inline">Welcome back</span>
+          <div class="ct-avatar" aria-hidden="true">{{ userInitials }}</div>
+          <a class="btn btn-outline-light btn-sm" (click)="logout()">Logout</a>
+        </div>
+      }
+    </div>
+  </div>
+</nav>

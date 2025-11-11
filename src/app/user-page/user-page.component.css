@@ -1,0 +1,72 @@
+.user-page {
+  display: flex;
+  align-items: stretch; /* aligns top edges */
+  gap: 20px; /* spacing between photo and info */
+  padding: 20px;
+    /*width: 100%; !* Ensure the container has a defined width *!*/
+    border: 1px solid blue; /* For visualization */
+  }
+
+
+.profile-photo img {
+  width: 240px; /* control image size */
+  height: 240px;
+  border-radius: 50%; /* makes it a circle */
+  object-fit: cover; /* crops nicely */
+}
+
+/*.user-details-style {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: stretch;      !* 👈 important *!*/
+/*  padding: 16px;             !* optional *!*/
+/*  border: 1px solid #eee;    !* optional *!*/
+/*  border-radius: 12px;*/
+/*}*/
+
+/*!* Header: make sure it’s block and stretches *!*/
+/*.section-title {*/
+/*  display: block;            !* in case something reset it *!*/
+/*  width: 100%;               !* ensures full width inside flex *!*/
+/*  background: #0d6efd;*/
+/*  color: #fff;*/
+/*  margin: 0 0 12px 0;*/
+/*  padding: 8px 12px;*/
+/*  border-radius: 8px;*/
+/*}*/
+
+/*!* If you want the color to ignore the container padding (true full-bleed): *!*/
+/*.section-title.full-bleed {*/
+/*  margin: -16px -16px 12px;  !* negate the parent padding *!*/
+/*  padding: 8px 16px;*/
+/*  border-radius: 12px 12px 8px 8px;*/
+/*}*/
+/* Parent “card” */
+.user-details-style {
+  --pad: 16px;                 /* only change padding here */
+  border: 1px solid #eee;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;        /* ensures children can stretch full width */
+}
+
+/* Header */
+.section-title {
+  flex-: 1;
+  background: #2f6df6;
+  color: #fff;
+  margin: 0 0 12px 0;          /* no default h2 margins */
+  padding: 8px var(--pad);
+  border-radius: 10px;
+  align-items: stretch;
+}
+
+/* Make it truly edge-to-edge inside the padded card */
+.section-title.full-bleed {
+  margin-left: calc(-1 * var(--pad));
+  margin-right: calc(-1 * var(--pad));
+  /* match the card’s top corners so it looks seamless */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}

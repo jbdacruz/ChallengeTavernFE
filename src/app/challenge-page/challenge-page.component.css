@@ -1,0 +1,61 @@
+.add-exercise-button {
+  border-radius: 12px;
+  padding: 8px 18px;
+  font-family: Stencil;
+}
+
+/* Hero header styling */
+.challenge-hero {
+  background: linear-gradient(135deg, #EE0707FF 0%, #f1d154 100%);
+  box-shadow: 0 10px 30px rgba(13, 110, 253, 0.25);
+}
+.hero-glow {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(closest-side, rgba(255,255,255,0.12), transparent 60%);
+  pointer-events: none;
+}
+
+/* Tiny stat cards inside the hero */
+.stat-card .stat-label {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  color: rgba(255,255,255,0.85);
+}
+.stat-card .stat-value {
+  font-size: 1.4rem;
+  line-height: 1;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Avatar circles with initials */
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  background: #e9ecef;
+  color: #495057;
+}
+
+/* Table polish */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.table-responsive {
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+.date-validation-error{
+  color: red;
+}
