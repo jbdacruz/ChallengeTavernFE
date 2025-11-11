@@ -8,9 +8,9 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
       - run: npm ci
-        working-directory: ./src
+        working-directory: src
       - run: npm run build -- --configuration=production
-        working-directory: ./src
+        working-directory: src
 
       - name: Upload index.html (no-cache)
         run: |
