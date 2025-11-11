@@ -1,0 +1,38 @@
+/* Self-hosted Stardos Stencil — TTF (works), WOFF2 (better) if you can convert */
+@font-face {
+  font-family: "Stencil";
+  src:
+    local("Stardos Stencil Regular"),
+    local("Stardos Stencil"),
+    url("/assets/fonts/StardosStencil-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Stencil";
+  src:
+    local("Stardos Stencil Bold"),
+    url("/assets/fonts/StardosStencil-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Use the family app-wide with sensible fallbacks */
+:root {
+  --font-sans: "Stencil", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+  Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-sans);
+  font-weight: 400; /* default to regular */
+}
+
+input, button, select, textarea { font: inherit; }
+
+/* Optional: ensure children inherit unless they explicitly override */
+body * { font-family: inherit; }

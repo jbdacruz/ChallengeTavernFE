@@ -1,0 +1,74 @@
+/* Self-hosted Stardos Stencil — TTF (works), WOFF2 (better) if you can convert */
+@font-face {
+  font-family: "Stencil";
+  src:
+    local("Stardos Stencil Regular"),
+    local("Stardos Stencil"),
+    url('assets/fonts/StardosStencil-Regular.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Stencil";
+  src:
+    local("Stardos Stencil Bold"),
+    url("assets/fonts/StardosStencil-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+*{
+  font-family: "Stencil";
+}
+
+/* Gradient + glassy navbar to match the hero section */
+.ct-navbar {
+  background: linear-gradient(135deg, #f1d154 0%, #EE0707FF 100%);
+  /*box-shadow: 0 6px 24px rgba(13, 110, 253, 0.25);*/
+  backdrop-filter: saturate(140%) blur(6px);
+}
+
+/* Tweak nav links for better legibility on dark background */
+.ct-navbar .nav-link {
+  color: rgba(209, 24, 24, 0.85);
+  font-weight: 500;
+  padding: .5rem .9rem;
+  border-radius: .5rem;
+  transition: background-color .15s ease, color .15s ease, transform .1s;
+}
+
+.ct-navbar .nav-link:hover {
+  color: #fff;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.ct-navbar .nav-link.active {
+  color: #111;
+  background-color: #e81313;
+}
+
+/* Brand image sizing on small screens */
+.ct-navbar .navbar-brand img {
+  width: 40px;
+  height: 40px;
+}
+
+@media (min-width: 576px) {
+  .ct-navbar .navbar-brand img {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Compact user avatar with initials */
+.ct-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  background: #e9ecef;
+  color: #495057;
+}
