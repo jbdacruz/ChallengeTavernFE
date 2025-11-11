@@ -10,14 +10,10 @@ jobs:
       - run: npm ci
       - run: npm run build -- --configuration=production
 
-      - name: Upload index.html (no-cache)
+      - name: Upload SPA to s3 (long cache)
         run: |
-          aws s3 cp dist/*/index.html s3://challengetavern-spa-prod/index.html \
-            --cache-control "no-store, no-cache, must-revalidate" \
-            --content-type "text/html"
-      - name: Upload assets (long cache)
-        run: |
-          aws s3 sync dist/*/ s3://challengetavern-spa-prod/ \
+          DIST_DIR="dist/challengetavernfe/browser"
+          aws s3 sync DIST_DIR s3://challengetavern-spa-prod/ \
             --exclude "index.html" \
             --cache-control "public, max-age=31536000, immutable"
       - name: Invalidate CloudFront (index.html)
