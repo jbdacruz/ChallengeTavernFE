@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "untitled": {
+    "challengetavernfe": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -62,10 +62,10 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "untitled:build:production"
+              "buildTarget": "challengetavernfe:build:production"
             },
             "development": {
-              "buildTarget": "untitled:build:development"
+              "buildTarget": "challengetavernfe:build:development"
             }
           },
           "defaultConfiguration": "development"
