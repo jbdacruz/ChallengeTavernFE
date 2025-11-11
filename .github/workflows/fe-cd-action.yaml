@@ -5,6 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::576627597452:role/tf-ci-role
+          aws-region: us-east-1
+
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
       - run: npm ci
