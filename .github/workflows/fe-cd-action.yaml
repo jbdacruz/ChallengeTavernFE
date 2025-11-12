@@ -23,8 +23,7 @@ jobs:
       - name: Upload SPA to s3 (long cache)
         run: |
           aws s3 sync "dist/challengetavernfe/browser" s3://challengetavern-spa-prod/ \
-            --exclude "index.html" \
-            --cache-control "public, max-age=31536000, immutable"
+               --cache-control "public, max-age=31536000, immutable"
       - name: Invalidate CloudFront (index.html)
         run: |
           aws cloudfront create-invalidation \
