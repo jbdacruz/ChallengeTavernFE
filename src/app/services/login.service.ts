@@ -25,9 +25,7 @@ export class LoginService {
   login(username: string, password: string, body: URLSearchParams): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: 'Basic ' + btoa(username + ":" + password),
-        'Content-Type': 'application/x-www-form-urlencoded'
-    }
-      );
+    });
 
     return this.http.get('/api/v1/users/user', {
       headers,
