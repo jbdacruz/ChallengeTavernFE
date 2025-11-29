@@ -132,7 +132,7 @@
     @if (showForm()) {
       <form #exerciseForm="ngForm" (ngSubmit)="addExercise(exerciseForm)" class="border rounded p-3 mb-3">
 
-        <div ngModelGroup="times" appDateRangeValidator>
+        <div ngModelGroup="times" >
           <div class="row g-3">
             <div class="col-md-4">
               <label class="form-label">Start Time</label>
