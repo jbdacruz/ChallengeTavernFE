@@ -14,6 +14,6 @@ export class DateRangeValidatorDirective implements Validator {
     const end = control.get('endTime')?.value;
 
     if (!start || !end) return null;
-    return end > start ? null : { dateRange: true };
+    return end < start ? null : { dateRange: true };
   }
 }
