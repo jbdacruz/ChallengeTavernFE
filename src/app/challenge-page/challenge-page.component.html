@@ -132,7 +132,7 @@
     @if (showForm()) {
       <form #exerciseForm="ngForm" (ngSubmit)="addExercise(exerciseForm)" class="border rounded p-3 mb-3">
 
-        <div ngModelGroup="times" >
+        <div ngModelGroup="times">
           <div class="row g-3">
             <div class="col-md-4">
               <label class="form-label">Start Time</label>
@@ -141,13 +141,13 @@
 
             <div class="col-md-4">
               <label class="form-label">End Time</label>
-              <input class="form-control" type="datetime-local" name="endTime" ngModel required #endTime='ngModel'>
+              <input class="form-control" type="datetime-local" name="endTime" ngModel required>
+            </div>
 
-
-            @if (exerciseForm.controls['times'].errors?.['dateRange']) {
-              <p class="date-validation-error">End date must be greater than start date</p>
-            }
-          </div>
+          @if (exerciseForm.controls['times']?.errors?.['dateRange']) {
+            <p class="date-validation-error">End date must be greater than start date</p>
+          }
+        </div>
 
           <div class="col-md-3">
             <label class="form-label">Distance (m)</label>
@@ -158,7 +158,6 @@
             <label class="form-label">Notes</label>
             <input class="form-control" type="text" name="notes" ngModel>
           </div>
-        </div>
 
         <div class="mt-3 d-flex gap-2">
           <button type="submit" class="btn btn-success">Save</button>

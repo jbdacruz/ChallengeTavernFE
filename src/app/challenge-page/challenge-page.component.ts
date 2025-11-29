@@ -8,14 +8,12 @@ import {User} from '../models/user';
 import {Exercise, ExerciseCreatePayload} from '../models/exercise';
 import {FormsModule} from '@angular/forms';
 import {NgForm} from '@angular/forms';
-import {DateRangeValidatorDirective} from '../directives/date-range.directive';
 
 @Component({
   selector: 'app-challenge-page',
   standalone: true,
   imports: [
     FormsModule,
-    DateRangeValidatorDirective
   ],
   templateUrl: './challenge-page.component.html',
   styleUrl: './challenge-page.component.css'
@@ -52,32 +50,43 @@ export class ChallengePageComponent {
   addExercise(form: NgForm) {
     if (form.invalid) return;
 
-    const payload = form.value; // { participantId, startTime, endTime, distance, notes }
-    let exercise: ExerciseCreatePayload = payload;
+    // Values are nested under the "times" group
+    const startLocal: string | undefined = form.value?.times?.startTime;
+    const endLocal:   string | undefined = form.value?.times?.endTime;
 
-    exercise.challengeId = this.challenge.challengeId;
-    exercise.type = this.challenge.exerciseType;
-    console.log("exercise: "+exercise.challengeId);
-    const startLocal = form.value.startTime as string;
-    const endLocal   = form.value.endTime as string;
+    if (!startLocal || !endLocal) {
+      console.error('Missing start/end time from form group');
+      return;
+    }
 
-// Convert local → JS Date → ISO UTC string with Z
-    const startIso = new Date(startLocal).toISOString();
-    const endIso   = new Date(endLocal).toISOString();
+    // Convert local (e.g., "2025-11-01T12:43") -> Date -> ISO (UTC "Z")
+    const startDate = new Date(startLocal);
+    const endDate   = new Date(endLocal);
 
+    if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+      console.error('Start/End time invalid');
+      return;
+    }
 
-    // TODO: call your service: this.exerciseService.create(payload).subscribe(...)
-  payload.startTime = startIso;
-  payload.endTime = endIso;
-    this.exerciseService.saveExercise(exercise).subscribe(
-      rt => {
-        this.exercises.push(rt);
-        console.log("returned data bruh: "+ rt.firstName);
-      }
-    );
-    console.log('submit', payload);
-    this.showForm.set(false);
-    form.resetForm();
+    const startIso = startDate.toISOString();
+    const endIso   = endDate.toISOString();
+
+    // Build the payload explicitly to avoid stale values
+    const exercise: ExerciseCreatePayload = {
+      challengeId: this.challenge.challengeId,
+      type: this.challenge.exerciseType,
+      startTime: startIso,
+      endTime: endIso,
+      distance: form.value.distance,
+      notes: form.value.notes
+      // add any other fields your API expects
+    };
+
+    this.exerciseService.saveExercise(exercise).subscribe(rt => {
+      this.exercises.push(rt);
+      this.showForm.set(false);
+      form.resetForm();
+    });
   }
 
   protected readonly ChallengeType = ChalllengeType;
