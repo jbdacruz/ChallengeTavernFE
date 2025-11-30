@@ -77,7 +77,7 @@ export class ChallengePageComponent {
       type: this.challenge.exerciseType,
       startTime: startIso,
       endTime: endIso,
-      distance: form.value.distance,
+      distanceMeters: form.value.distance,
       notes: form.value.notes
       // add any other fields your API expects
     };
