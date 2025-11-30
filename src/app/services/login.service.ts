@@ -55,6 +55,7 @@ export class LoginService {
 
   clearSession() {
       sessionStorage.removeItem('user');
+      this.cookieService.deleteAll();
       // flip any auth signals/subjects you use
   }
 setUser(user: User) {
