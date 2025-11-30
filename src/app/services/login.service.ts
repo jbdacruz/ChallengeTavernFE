@@ -35,10 +35,10 @@ export class LoginService {
     }).pipe(
       // The response sets JSESSIONID. Now warm the session with a 2nd call if you want:
       // switchMap(() => this.http.get('/api/v1/users/user', { withCredentials: true })),
-      tap(() => {
+      tap(next => {
           this.user = <User>next.body
           window.sessionStorage.setItem("user", JSON.stringify(this.user));
-          this.loginService.setUser(this.user);
+          this.setUser(this.user);
         }
       )
     );
