@@ -39,7 +39,7 @@ export class LoginComponent {
         this.loading = false;
         this.authError = '';
         // wherever you send them after auth:
-        this.router.navigate(['/challenges'], {replaceUrl: true});
+        this.router.navigate(['challenges'], {replaceUrl: true});
       },
       error => {
         console.log(error);
