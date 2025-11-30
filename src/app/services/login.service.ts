@@ -15,6 +15,7 @@ export class LoginService {
   xsrfToken: string;
   sessionId: string;
   user = new User();
+
   constructor() {
     this.http = inject(HttpClient);
     this.cookieService = inject(CookieService);
@@ -24,16 +25,22 @@ export class LoginService {
 
   login(username: string, password: string, body: URLSearchParams): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: 'Basic ' + btoa(username + ":" + password) });
+      Authorization: 'Basic ' + btoa(username + ":" + password)
+    });
 
     return this.http.get('/api/v1/users/user', {
       headers,
       withCredentials: true,
       observe: 'response'
-    }) .pipe(
+    }).pipe(
       // The response sets JSESSIONID. Now warm the session with a 2nd call if you want:
       // switchMap(() => this.http.get('/api/v1/users/user', { withCredentials: true })),
-      tap(() => this.authState$.next({ isAuth: true } as any))
+      tap(() => {
+          this.user = <User>next.body
+          window.sessionStorage.setItem("user", JSON.stringify(this.user));
+          this.loginService.setUser(this.user);
+        }
+      )
     );
 
   }
@@ -44,7 +51,7 @@ export class LoginService {
   }
 
   logout() {
-     return this.http.post(
+    return this.http.post(
       '/logout',         // relative URL so XSRF header is added
       {},
       {
@@ -58,13 +65,14 @@ export class LoginService {
   }
 
   clearSession() {
-      sessionStorage.removeItem('user');
-      this.cookieService.deleteAll();
-      // flip any auth signals/subjects you use
+    sessionStorage.removeItem('user');
+    this.cookieService.deleteAll();
+    // flip any auth signals/subjects you use
   }
-setUser(user: User) {
+
+  setUser(user: User) {
     this.user = user;
-}
+  }
 
 
 }

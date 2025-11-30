@@ -38,9 +38,6 @@ export class LoginComponent {
       next => {
         this.loading = false;
         this.authError = '';
-        this.user = <User>next.body
-        window.sessionStorage.setItem("user", JSON.stringify(this.user));
-        this.loginService.setUser(this.user);
         // wherever you send them after auth:
         this.router.navigate(['/challenges'], {replaceUrl: true});
       },
