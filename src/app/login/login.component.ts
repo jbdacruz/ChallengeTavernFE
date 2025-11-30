@@ -45,6 +45,7 @@ export class LoginComponent {
         this.router.navigate(['/challenges'], {replaceUrl: true});
       },
       error => {
+        console.log(error);
         this.loading = false;
         this.authError = 'Invalid username or password.';
       }

@@ -30,7 +30,11 @@ export class LoginService {
       headers,
       withCredentials: true,
       observe: 'response'
-    });
+    }) .pipe(
+      // The response sets JSESSIONID. Now warm the session with a 2nd call if you want:
+      // switchMap(() => this.http.get('/api/v1/users/user', { withCredentials: true })),
+      tap(() => this.authState$.next({ isAuth: true } as any))
+    );
 
   }
 
